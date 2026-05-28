@@ -260,7 +260,7 @@
 <div class="collage fade-in">
   <figure><img src="photos/43-ides-of-march.jpg" alt="The Ides of March"><figcaption data-edit-id="collage-cap-1">The Ides of March · March 2026</figcaption></figure>
   <figure><img src="photos/40-guthries-concert.jpg" alt="The Guthries Concert"><figcaption data-edit-id="collage-cap-2">The Guthries Concert · January 2026</figcaption></figure>
-  <figure><img src="photos/32-private-avalon-launch.jpg" alt="Private Avalon Launch Party"><figcaption data-edit-id="collage-cap-3">Private Avalon Launch · August 2025</figcaption></figure>
+  <figure><img src="photos/32-private-avalon-launch.jpg" alt="Avalon Launch"><figcaption data-edit-id="collage-cap-3">Avalon Launch · August 2025</figcaption></figure>
   <figure><img src="photos/30-rosenbauer-complexity.jpg" alt="Charles Rosenbauer — NP and Complexity"><figcaption data-edit-id="collage-cap-4">Charles Rosenbauer · NP and Complexity · July 2025</figcaption></figure>
   <figure><img src="photos/22-string-quartet.jpg" alt="String Quartet"><figcaption data-edit-id="collage-cap-5">String Quartet · July 2025</figcaption></figure>
   <figure><img src="photos/21-plato-protagoras.jpg" alt="Plato for the People — Protagoras"><figcaption data-edit-id="collage-cap-6">Plato for the People · Protagoras · November 2025</figcaption></figure>
@@ -272,7 +272,7 @@
 
 <section class="fade-in" id="about">
 <p data-edit-id="about-p-2">As institutional decay and atomization degrade the infrastructure meant to enable the next generation of thought and art, new contexts must be created where they can find the fellowships they need to build a future.&nbsp; Avalon's purpose is to provide them.</p>
-<p data-edit-id="about-p-house"><span id="house" style="color: rgb(154, 106, 31); font-variant-caps: small-caps; font-weight: 600; letter-spacing: 0.72px;">Avalon House&nbsp;</span>is our initial foundation: a home in Twin Peaks for the open-ended pursuit of truth and the production of events and cultural life. Since September 2024, it has hosted poetry readings, string quartets, acted Platonic dialogues, lectures, weekend seminars, symposia, and brought together scholars from around the world.</p>
+<p data-edit-id="about-p-house"><span id="house" style="color: rgb(154, 106, 31); font-variant-caps: small-caps; font-weight: 600; letter-spacing: 0.72px;">Avalon House&nbsp;</span>is Avalon's current San Francisco base: a home in Twin Peaks for the open-ended pursuit of truth and the production of events and cultural life. Since September 2024, it has hosted poetry readings, string quartets, acted Platonic dialogues, lectures, weekend seminars, symposia, and brought together scholars from around the world.</p>
 <p data-edit-id="about-p-institute"><span id="institute" style="color: rgb(154, 106, 31); font-variant-caps: small-caps; font-weight: 600; letter-spacing: 0.72px;">Avalon Institute&nbsp;</span>builds the capacity needed to draw enduring work into the world. Through technical and media support, publications, and the cultivation of a network, Avalon turns fellowship into a foundation. We work to maintain an ecology of collaboration and exchange where many projects can carve out a home.</p>
 <p data-edit-id="house-p-3" style="color:var(--text-dim);font-size:0.9rem;font-style:italic;margin-top:1.5rem">We co-host with organisations that share a deep intellectual or cultural focus. <a href="mailto:wallis@avalon.institute" style="color:var(--gold-dim);text-decoration:none">Reach out →</a></p>
 </section>
@@ -323,8 +323,6 @@
 <div class="donate-section fade-in" style="margin:2.5rem 0">
 <span class="section-label" data-edit-id="support-label-2027+-operating-fund">Founding Raise</span>
 <span class="donate-amount" data-edit-id="support-amount">$1,000,000</span>
-<div class="donate-progress"><div class="donate-progress-fill" id="progressBar"></div></div>
-<div class="donate-progress-label"><span>$54,000 raised</span><span>5.4%</span></div>
 <div class="btn-group" style="justify-content:center;margin-top:2em">
 <a class="btn btn-primary" href="https://donate.stripe.com/eVq00i9hqa7sgCn2uFgnK00" target="_blank" rel="noopener">Donate</a>
 <a class="btn" href="mailto:wallis@avalon.institute">Get in Touch</a>
@@ -333,7 +331,7 @@
 </section>
 <div class="rule-echelon fade-in" style="margin-top:1rem"><span class="rule-gold"></span><span class="rule-echelon-mark">◇</span><span class="rule-gold"></span></div>
 <footer class="fade-in">
-<div class="footer-text" data-edit-id="footer-text">The Avalon Institute · Twin Peaks, San Francisco<br/>A fiscally sponsored project of the Mars Review of Books Foundation, 501(c)(3) · EIN 92-1553880</div>
+<div class="footer-text" data-edit-id="footer-text">The Avalon Institute · Twin Peaks, San Francisco</div>
 <div class="footer-links">
 <a href="https://x.com/AvalonInst">X / Twitter</a>
 <a href="mailto:wallis@avalon.institute">Contact</a>
@@ -347,9 +345,11 @@
   }, { threshold: 0.08 });
   document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
   const bar = document.getElementById('progressBar');
-  new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) { bar.style.width = '5.4%'; }
-  }).observe(bar);
+  if (bar) {
+    new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) { bar.style.width = '0%'; }
+    }).observe(bar);
+  }
 </script>
 <script>
 /* Inline prose editor — only activates when the URL contains ?edit. Inert otherwise.
@@ -369,7 +369,7 @@
   function init() {
     document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
     const pb = document.getElementById('progressBar');
-    if (pb) pb.style.width = '5.4%';
+    if (pb) pb.style.width = '0%';
 
     document.querySelectorAll('[data-edit-id]').forEach(el => {
       elements.set(el.getAttribute('data-edit-id'), { el, savedInner: el.innerHTML });
