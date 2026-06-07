@@ -4,6 +4,8 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="robots" content="noindex,nofollow"/>
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://script.google.com https://script.googleusercontent.com; connect-src https://script.google.com https://script.googleusercontent.com https://fonts.googleapis.com https://fonts.gstatic.com; form-action https://docs.google.com; frame-src https://docs.google.com; upgrade-insecure-requests"/>
 <title>Avalon's Summer Soirée - The Avalon Institute</title>
 <meta name="description" content="A private Avalon Institute soirée invitation and RSVP page."/>
 <link rel="icon" type="image/png" href="/favicon.png"/>
@@ -606,13 +608,6 @@
     padding-top: 1.4rem;
   }
 
-  .attendee-count {
-    margin-bottom: 0.8rem;
-    color: var(--text-dim);
-    font-size: 0.95rem;
-    font-style: italic;
-  }
-
   .attendee-list {
     display: flex;
     flex-wrap: wrap;
@@ -894,7 +889,7 @@
             <label for="phone">Phone</label>
             <input id="phone" name="entry.1373566687" type="tel" autocomplete="tel" inputmode="tel" required/>
           </div>
-          <p class="privacy-note">Used only for event updates.</p>
+          <p class="privacy-note">Phone is used only for event updates. Your name may appear on the attendee list.</p>
 
           <div class="field">
             <label for="guests">Guests</label>
@@ -932,7 +927,6 @@
 
       <aside class="attendees fade-in" aria-label="Attending guests">
         <span class="section-label">Attending</span>
-        <p id="attendee-count" class="attendee-count"></p>
         <ul id="attendee-list" class="attendee-list"></ul>
         <p id="empty-attendees" class="empty-attendees">Attending guests can be listed here.</p>
       </aside>
@@ -981,7 +975,6 @@
 
   const attendeeData = document.getElementById('attendee-data');
   const attendeeList = document.getElementById('attendee-list');
-  const attendeeCount = document.getElementById('attendee-count');
   const emptyAttendees = document.getElementById('empty-attendees');
   const approvedGuestsEndpoint = 'https://script.google.com/macros/s/AKfycbzJLbq_YAP9uTbZxhh_r_pw9hvbYK_hUfeUSHObrH-7Jl1fYxI9YZN0EOVupaWkT_ZStw/exec';
 
@@ -994,7 +987,6 @@
 
     if (cleanNames.length) {
       emptyAttendees.hidden = true;
-      attendeeCount.textContent = cleanNames.length === 1 ? '1 RSVP shown.' : `${cleanNames.length} RSVPs shown.`;
       cleanNames.forEach(name => {
         const item = document.createElement('li');
         item.textContent = name;
@@ -1002,7 +994,6 @@
       });
     } else {
       emptyAttendees.hidden = false;
-      attendeeCount.textContent = '';
     }
   }
 
@@ -1010,7 +1001,6 @@
     renderAttendees(JSON.parse(attendeeData.textContent));
   } catch (error) {
     emptyAttendees.hidden = false;
-    attendeeCount.textContent = '';
   }
 
   function loadAttendeesWithJsonp() {
