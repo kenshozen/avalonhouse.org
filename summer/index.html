@@ -1013,15 +1013,28 @@
     attendeeCount.textContent = '';
   }
 
-  window.avalonApprovedGuests = payload => {
-    if (!payload || !Array.isArray(payload.names)) return;
-    renderAttendees(payload.names);
-  };
+  function loadAttendeesWithJsonp() {
+    window.avalonApprovedGuests = payload => {
+      if (!payload || !Array.isArray(payload.names)) return;
+      renderAttendees(payload.names);
+    };
 
-  const attendeeScript = document.createElement('script');
-  attendeeScript.src = `${approvedGuestsEndpoint}?callback=avalonApprovedGuests&v=${Date.now()}`;
-  attendeeScript.async = true;
-  document.head.appendChild(attendeeScript);
+    const attendeeScript = document.createElement('script');
+    attendeeScript.src = `${approvedGuestsEndpoint}?callback=avalonApprovedGuests&v=${Date.now()}`;
+    attendeeScript.async = true;
+    document.head.appendChild(attendeeScript);
+  }
+
+  fetch(`${approvedGuestsEndpoint}?v=${Date.now()}`, { cache: 'no-store' })
+    .then(response => {
+      if (!response.ok) throw new Error(`RSVP feed returned ${response.status}`);
+      return response.json();
+    })
+    .then(payload => {
+      if (!payload || !Array.isArray(payload.names)) return;
+      renderAttendees(payload.names);
+    })
+    .catch(loadAttendeesWithJsonp);
 </script>
 </body>
 </html>
