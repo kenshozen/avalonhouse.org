@@ -29,7 +29,10 @@
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+  html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
 
   body {
     min-height: 100vh;
@@ -39,6 +42,7 @@
     font-size: 18px;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
   body::before {
@@ -590,6 +594,16 @@
     color: var(--text);
   }
 
+  .prose .drop-cap::first-letter {
+    float: left;
+    margin: 0.06em 0.09em 0 0;
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 3.05em;
+    font-weight: 400;
+    line-height: 0.72;
+  }
+
   .attendees {
     padding-top: 1.4rem;
   }
@@ -762,6 +776,11 @@
       grid-template-columns: 1fr;
     }
 
+    .prose .drop-cap::first-letter {
+      margin-top: 0.04em;
+      font-size: 2.75em;
+    }
+
     .programming-cue {
       display: none;
     }
@@ -824,6 +843,12 @@
     .scroll-arrow {
       width: min(100%, 20rem);
       height: 2.65rem;
+    }
+
+    .prose .drop-cap::first-letter {
+      font-size: 2.55em;
+      line-height: 0.76;
+      margin-right: 0.08em;
     }
   }
 </style>
@@ -914,8 +939,7 @@
   <section class="content" id="programming">
     <div class="body-grid">
       <div class="prose fade-in">
-        <span class="section-label">The Gathering</span>
-        <p>Avalon is holding a soirée to welcome in the summer. Expect live music, cocktails, conversation, and discussion of Avalon's upcoming plans. Please bring flowers in some form: garlands, crowns, pinned blooms, embroidered or printed flowers, or simply in a bouquet.</p>
+        <p class="drop-cap">Avalon is holding a soirée to welcome in the summer. Expect live music, cocktails, conversation, and discussion of Avalon's upcoming plans. Please bring flowers in some form: garlands, crowns, pinned blooms, embroidered or printed flowers, or simply in a bouquet.</p>
         <p>At 8:20 PM as the sun begins to set, there will be a reading of poems celebrating the season. Bring fitting tributes from your favorite poets. There will be periodic performances of music throughout the evening.</p>
       </div>
 
