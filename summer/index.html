@@ -983,23 +983,45 @@
   const attendeeList = document.getElementById('attendee-list');
   const attendeeCount = document.getElementById('attendee-count');
   const emptyAttendees = document.getElementById('empty-attendees');
+  const approvedGuestsEndpoint = 'https://script.google.com/macros/s/AKfycbzJLbq_YAP9uTbZxhh_r_pw9hvbYK_hUfeUSHObrH-7Jl1fYxI9YZN0EOVupaWkT_ZStw/exec';
 
-  try {
-    const names = JSON.parse(attendeeData.textContent).filter(Boolean);
-    if (names.length) {
+  function renderAttendees(names) {
+    const cleanNames = names
+      .map(name => String(name || '').trim())
+      .filter(Boolean);
+
+    attendeeList.innerHTML = '';
+
+    if (cleanNames.length) {
       emptyAttendees.hidden = true;
-      attendeeCount.textContent = names.length === 1 ? '1 RSVP shown.' : `${names.length} RSVPs shown.`;
-      names.forEach(name => {
+      attendeeCount.textContent = cleanNames.length === 1 ? '1 RSVP shown.' : `${cleanNames.length} RSVPs shown.`;
+      cleanNames.forEach(name => {
         const item = document.createElement('li');
         item.textContent = name;
         attendeeList.appendChild(item);
       });
     } else {
+      emptyAttendees.hidden = false;
       attendeeCount.textContent = '';
     }
+  }
+
+  try {
+    renderAttendees(JSON.parse(attendeeData.textContent));
   } catch (error) {
+    emptyAttendees.hidden = false;
     attendeeCount.textContent = '';
   }
+
+  window.avalonApprovedGuests = payload => {
+    if (!payload || !Array.isArray(payload.names)) return;
+    renderAttendees(payload.names);
+  };
+
+  const attendeeScript = document.createElement('script');
+  attendeeScript.src = `${approvedGuestsEndpoint}?callback=avalonApprovedGuests&v=${Date.now()}`;
+  attendeeScript.async = true;
+  document.head.appendChild(attendeeScript);
 </script>
 </body>
 </html>
