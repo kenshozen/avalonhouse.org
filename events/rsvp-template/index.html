@@ -881,25 +881,24 @@
 
         <!--
           Google Forms setup:
-          1. Replace FORM_ACTION with the formResponse URL from the Google Form.
-          2. Replace each entry.000000000 name with the matching Google Form field ID.
-          3. Keep the hidden iframe target if you want guests to stay on this page after submit.
+          Submits to Avalon's Summer Soiree RSVP Google Form.
+          Keep the hidden iframe target so guests stay on this page after submit.
         -->
-        <form id="rsvp-form" action="FORM_ACTION" method="POST" target="google-form-target">
+        <form id="rsvp-form" action="https://docs.google.com/forms/d/e/1FAIpQLSePu_WPHyRah9iU-v11xqZHhRyCEsYrWtjKME5AI24aJf198Q/formResponse" method="POST" target="google-form-target">
           <div class="field">
             <label for="name">Name</label>
-            <input id="name" name="entry.000000000" type="text" autocomplete="name" required/>
+            <input id="name" name="entry.876315556" type="text" autocomplete="name" required/>
           </div>
 
           <div class="field">
             <label for="phone">Phone</label>
-            <input id="phone" name="entry.111111111" type="tel" autocomplete="tel" inputmode="tel" required/>
+            <input id="phone" name="entry.1373566687" type="tel" autocomplete="tel" inputmode="tel" required/>
           </div>
           <p class="privacy-note">Used only for event updates.</p>
 
           <div class="field">
             <label for="guests">Guests</label>
-            <select id="guests" name="entry.222222222">
+            <select id="guests" name="entry.865696062">
               <option value="1">Just me</option>
               <option value="2">Me + 1</option>
               <option value="3">Me + 2</option>
@@ -909,7 +908,7 @@
 
           <div class="field">
             <label for="note">Note</label>
-            <textarea id="note" name="entry.333333333" placeholder="Optional"></textarea>
+            <textarea id="note" name="entry.62914391" placeholder="Optional"></textarea>
           </div>
 
           <button class="btn" type="submit">Send RSVP</button>
