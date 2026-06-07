@@ -85,7 +85,7 @@
   }
 
   .hero {
-    min-height: min(820px, 92vh);
+    min-height: min(860px, 96vh);
     display: grid;
     align-items: end;
     position: relative;
@@ -130,7 +130,7 @@
     left: 1.35rem;
     display: flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 0.72rem;
     font-family: 'Cinzel', serif;
     font-size: 0.68rem;
     letter-spacing: 0.2em;
@@ -190,33 +190,38 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.35rem 0.62rem;
+    gap: 0.35rem 0.58rem;
     color: var(--cream-dim);
     font-style: italic;
+    line-height: 1.25;
   }
 
-  .theme-mark {
+  .inline-echelon {
     color: var(--gold);
     font-family: 'Cinzel', serif;
-    font-size: 0.52em;
+    font-size: 0.66em;
+    font-weight: 600;
     font-style: normal;
     line-height: 1;
-    opacity: 0.96;
-    transform: translateY(-0.01em);
+    opacity: 1;
+    text-shadow: 0 0 8px rgba(216, 154, 58, 0.24), 0 1px 6px rgba(0, 0, 0, 0.35);
+    transform: translateY(-0.02em);
   }
 
   .details {
-    margin-top: 2rem;
+    margin-top: 1.45rem;
     display: grid;
-    gap: 0.7rem;
+    gap: 0.52rem;
     max-width: 620px;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.42);
   }
 
   .detail-row {
     display: grid;
-    grid-template-columns: 7rem 1fr;
+    grid-template-columns: 6.6rem 1fr;
     gap: 1rem;
-    padding: 0.75rem 0;
+    align-items: center;
+    padding: 0.62rem 0;
     position: relative;
   }
 
@@ -232,60 +237,129 @@
 
   .detail-label {
     font-family: 'Cinzel', serif;
-    font-size: 0.67rem;
-    letter-spacing: 0.2em;
+    font-size: 0.78em;
+    letter-spacing: 0.18em;
+    line-height: 1.25;
     text-transform: uppercase;
-    color: var(--gold-dim);
+    color: rgba(216, 154, 58, 0.82);
   }
 
   .detail-value {
-    color: var(--cream);
+    display: inline-block;
+    color: var(--text);
+    font-size: 1.04em;
+    line-height: 1.45;
+    transform: translateY(-1px);
   }
 
   .place-value {
-    display: block;
-    width: min(17rem, 100%);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.2rem 0.52rem;
+    width: auto;
     max-width: 100%;
     justify-self: start;
     text-align: left;
+    line-height: 1.25;
   }
 
   .place-name {
-    display: inline-block;
+    display: inline;
     position: relative;
-    padding-bottom: 0.26rem;
     color: var(--cream);
     line-height: 1.2;
   }
 
   .place-name::after {
-    content: '';
-    position: absolute;
-    left: -0.35rem;
-    right: -0.35rem;
-    bottom: 0;
-    height: 1px;
-    background: var(--rule-soft);
-    opacity: 0.58;
+    content: none;
   }
 
   .place-address {
-    display: block;
-    margin-top: 0.42rem;
+    display: inline;
+    margin-top: 0;
     color: var(--cream-dim);
     font-style: italic;
     text-align: left;
+    line-height: 1.25;
+  }
+
+  .place-city {
+    display: inline;
+  }
+
+  .dress-code {
+    position: relative;
+    width: max-content;
+    max-width: min(100%, 34rem);
+    margin-top: 0.35rem;
+    padding: 0.78rem 1rem 0.82rem;
+    color: var(--cream-dim);
+    font-style: italic;
+    line-height: 1.35;
+  }
+
+  .dress-code::before,
+  .dress-code::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-color: rgba(216, 154, 58, 0.56);
+    border-style: solid;
+    pointer-events: none;
+  }
+
+  .dress-code::before {
+    top: 0;
+    left: 0;
+    border-width: 1px 0 0 1px;
+  }
+
+  .dress-code::after {
+    right: 0;
+    bottom: 0;
+    border-width: 0 1px 1px 0;
+  }
+
+  .dress-label {
+    display: block;
+    margin-bottom: 0.26rem;
+    color: rgba(216, 154, 58, 0.86);
+    font-family: 'Cinzel', serif;
+    font-size: 0.72em;
+    font-style: normal;
+    letter-spacing: 0.18em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .dress-value {
+    display: block;
+    color: var(--text);
+    font-size: 1.02em;
+  }
+
+  .dress-emphasis {
+    display: block;
+    margin-top: 0.18rem;
+  }
+
+  .mobile-rsvp-link {
+    display: none;
   }
 
   .rsvp-panel {
-    background: rgba(20, 28, 18, 0.86);
-    border: 1px solid rgba(154, 106, 31, 0.34);
+    background: rgba(20, 28, 18, 0.75);
+    border: 1px solid rgba(216, 154, 58, 0.46);
     padding: clamp(1.5rem, 4vw, 2.2rem);
-    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.26);
-    backdrop-filter: blur(8px);
+    box-shadow: 0 24px 76px rgba(0, 0, 0, 0.38), inset 0 0 0 1px rgba(240, 232, 214, 0.035);
+    backdrop-filter: blur(10px) saturate(0.9);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.38);
     opacity: 0;
     animation: hero-copy-in 1450ms cubic-bezier(0.32, 0, 0.67, 1) 720ms forwards;
     will-change: opacity;
+    scroll-margin-top: 1rem;
   }
 
   .panel-title {
@@ -300,7 +374,7 @@
 
   .panel-note {
     margin-bottom: 1.4rem;
-    color: var(--text-dim);
+    color: var(--cream-dim);
     font-size: 0.98rem;
     line-height: 1.45;
   }
@@ -316,7 +390,7 @@
     font-size: 0.67rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--gold-dim);
+    color: rgba(216, 154, 58, 0.82);
   }
 
   input, select, textarea {
@@ -347,7 +421,7 @@
   .privacy-note {
     margin-top: -0.45rem;
     margin-bottom: 1.1rem;
-    color: var(--text-dim);
+    color: var(--cream-dim);
     font-size: 0.88rem;
     font-style: italic;
     line-height: 1.35;
@@ -405,10 +479,65 @@
 
   .status.visible { display: block; }
 
+  .programming-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 0.05rem;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.02rem;
+    width: min(520px, calc(100% - 2.5rem));
+    color: var(--gold);
+    text-decoration: none;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: hero-copy-in 1450ms cubic-bezier(0.32, 0, 0.67, 1) 1300ms forwards;
+  }
+
+  .programming-cue:hover {
+    color: var(--cream);
+  }
+
+  .programming-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    line-height: 1;
+    text-transform: uppercase;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.44);
+    transform: translateY(0.38rem);
+  }
+
+  .programming-title::before,
+  .programming-title::after {
+    content: none;
+  }
+
+  .scroll-arrow {
+    position: relative;
+    display: block;
+    width: min(25rem, 100%);
+    height: 3.15rem;
+    overflow: hidden;
+    opacity: 0.96;
+  }
+
+  .scroll-arrow img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 48%;
+  }
+
   .content {
     max-width: 1100px;
     margin: 0 auto;
-    padding: clamp(3rem, 8vw, 6rem) 1.25rem 4rem;
+    padding: clamp(0.8rem, 2vw, 1.4rem) 1.25rem 4rem;
   }
 
   .rule-echelon {
@@ -429,9 +558,11 @@
   .rule-mark {
     color: var(--gold);
     font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
+    font-size: 0.76rem;
+    font-weight: 600;
     line-height: 1;
-    opacity: 0.92;
+    opacity: 1;
+    text-shadow: 0 0 8px rgba(216, 154, 58, 0.24), 0 1px 6px rgba(0, 0, 0, 0.35);
     transform: translateY(-0.02em);
   }
 
@@ -467,7 +598,6 @@
   }
 
   .attendees {
-    border-top: 1px solid var(--green-muted);
     padding-top: 1.4rem;
   }
 
@@ -502,8 +632,8 @@
   footer {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 1.25rem 3rem;
-    color: var(--text-dim);
+    padding: 1.4rem 1.25rem 3rem;
+    color: rgba(200, 189, 168, 0.86);
     font-size: 0.85rem;
     text-align: center;
   }
@@ -554,12 +684,10 @@
   }
 
   .artwork-credit {
-    position: absolute;
-    right: 1.35rem;
-    bottom: 0.85rem;
-    z-index: 1;
-    color: rgba(200, 189, 168, 0.5);
-    font-size: 0.72rem;
+    display: block;
+    margin-top: 0.55rem;
+    color: rgba(232, 223, 200, 0.7);
+    font-size: 0.68rem;
     font-style: italic;
     letter-spacing: 0.04em;
   }
@@ -579,13 +707,20 @@
   @media (max-width: 860px) {
     .hero {
       min-height: auto;
+      overflow: visible;
       padding: 1rem;
     }
 
     .hero-inner {
+      display: block;
       grid-template-columns: 1fr;
-      gap: 2.5rem;
-      padding: 2.5rem 0.25rem 3rem;
+      padding: 3rem 0.25rem 3rem;
+    }
+
+    .hero-copy {
+      min-height: calc(100svh - 2rem);
+      padding-top: 1.5rem;
+      padding-bottom: 2.5rem;
     }
 
     .brand-mark {
@@ -593,17 +728,56 @@
       left: 1rem;
     }
 
+    .mobile-rsvp-link {
+      display: inline-block;
+      width: min(100%, 18rem);
+      margin-top: 1.45rem;
+      border: 1px solid rgba(216, 154, 58, 0.82);
+      background: rgba(216, 154, 58, 0.95);
+      color: var(--ink);
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      line-height: 1;
+      padding: 1rem 1.15rem;
+      text-align: center;
+      text-transform: uppercase;
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.28);
+    }
+
+    .mobile-rsvp-link:hover {
+      background: var(--cream);
+      border-color: var(--cream);
+      color: var(--ink);
+    }
+
     .rsvp-panel {
       max-width: 560px;
+      margin: 1.25rem auto 0;
     }
 
     .body-grid {
       grid-template-columns: 1fr;
     }
+
+    .programming-cue {
+      display: none;
+    }
   }
 
   @media (max-width: 560px) {
     body { font-size: 17px; }
+
+    .hero-copy,
+    .details,
+    .detail-value,
+    .place-value,
+    .dress-code,
+    .rsvp-panel,
+    .panel-note {
+      min-width: 0;
+      max-width: 100%;
+    }
 
     .brand-mark {
       align-items: center;
@@ -622,12 +796,32 @@
       gap: 0.15rem;
     }
 
+    .place-address,
+    .dress-value,
+    .panel-note {
+      overflow-wrap: break-word;
+    }
+
+    .dress-code {
+      width: 100%;
+    }
+
     .rsvp-panel {
       padding: 1.35rem 1.1rem;
     }
 
     input, select, textarea {
       font-size: 16px;
+    }
+
+    .programming-title {
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+    }
+
+    .scroll-arrow {
+      width: min(100%, 20rem);
+      height: 2.65rem;
     }
   }
 </style>
@@ -642,9 +836,9 @@
     </div>
     <div class="hero-inner">
       <div class="hero-copy">
-        <span class="eyebrow">Private Invitation</span>
+        <span class="eyebrow">A Private Invitation To</span>
         <h1><span class="title-line">Avalon's</span><span class="title-rule" aria-hidden="true"></span><span class="title-line">Summer Soiree</span></h1>
-        <p class="dek theme-list"><span>Music</span><span class="theme-mark" aria-hidden="true">◇</span><span>Poetry</span><span class="theme-mark" aria-hidden="true">◇</span><span>Company</span><span class="theme-mark" aria-hidden="true">◇</span><span>Conversation</span></p>
+        <p class="dek theme-list"><span>Music</span><span class="inline-echelon" aria-hidden="true">◇</span><span>Poetry</span><span class="inline-echelon" aria-hidden="true">◇</span><span>Company</span><span class="inline-echelon" aria-hidden="true">◇</span><span>Conversation</span></p>
         <div class="details" aria-label="Event details">
           <div class="detail-row">
             <span class="detail-label">Date</span>
@@ -656,12 +850,17 @@
           </div>
           <div class="detail-row">
             <span class="detail-label">Place</span>
-            <span class="detail-value place-value"><span class="place-name">Avalon House</span><span class="place-address">200 Palo Alto Avenue, San Francisco</span></span>
+            <span class="detail-value place-value"><span class="place-name">Avalon House</span><span class="inline-echelon" aria-hidden="true">◇</span><span class="place-address">200 Palo Alto Avenue <span class="place-city">San Francisco</span></span></span>
+          </div>
+          <div class="dress-code" aria-label="Dress code">
+            <span class="dress-label">Dress Code</span>
+            <span class="dress-value">Garden Party Attire: Linen shirts, suits, dresses; bring flowers in some form!</span>
           </div>
         </div>
+        <a class="mobile-rsvp-link" href="#rsvp">RSVP</a>
       </div>
 
-      <aside class="rsvp-panel" aria-label="RSVP form">
+      <aside class="rsvp-panel" id="rsvp" aria-label="RSVP form">
         <h2 class="panel-title">RSVP</h2>
         <p class="panel-note">Please leave your name and number so we can confirm details and send any event updates.</p>
 
@@ -704,11 +903,13 @@
         <iframe class="sr-only" name="google-form-target" title="RSVP submission target"></iframe>
       </aside>
     </div>
-    <span class="artwork-credit" aria-hidden="true">Henri Gervex, Une soirée au Pré-Catelan, 1909</span>
+    <a class="programming-cue" href="#programming" aria-label="Scroll to programming">
+      <span class="programming-title">Programming</span>
+      <span class="scroll-arrow" aria-hidden="true"><img src="programming-arrow-concept-v1-alpha.png" alt=""></span>
+    </a>
   </section>
 
-  <section class="content">
-    <div class="rule-echelon fade-in"><span class="rule-gold"></span><span class="rule-mark">◇</span><span class="rule-gold"></span></div>
+  <section class="content" id="programming">
     <div class="body-grid">
       <div class="prose fade-in">
         <span class="section-label">The Gathering</span>
@@ -726,8 +927,9 @@
   </section>
 </main>
 
-<footer class="fade-in">
-  The Avalon Institute - Twin Peaks, San Francisco - <a href="mailto:wallis@avalon.institute">wallis@avalon.institute</a>
+<footer>
+  <span>The Avalon Institute - Twin Peaks, San Francisco - <a href="mailto:wallis@avalon.institute">wallis@avalon.institute</a></span>
+  <span class="artwork-credit">Henri Gervex, Une soirée au Pré-Catelan, 1909</span>
 </footer>
 
 <script type="application/json" id="attendee-data">
