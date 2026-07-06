@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Avalon Account Visual Calibration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #141c12;
+    --green-mid: #1d281a;
+    --green-surface: #263422;
+    --green-muted: #2f412a;
+    --gold: #d89a3a;
+    --gold-dim: #9a6a1f;
+    --cream: #e8dfc8;
+    --cream-bright: #f0e8d6;
+    --text-dim: #9e9480;
+    --line: rgba(216, 154, 58, 0.34);
+    --line-quiet: rgba(232, 223, 200, 0.13);
+    --shadow: 0 22px 80px rgba(0, 0, 0, 0.36);
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    background: var(--green-deep);
+    color: var(--cream);
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top left, rgba(216, 154, 58, 0.06), transparent 34rem),
+      var(--green-deep);
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    opacity: 0.6;
+  }
+
+  a { color: var(--gold); }
+
+  .page {
+    position: relative;
+    z-index: 1;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem clamp(1rem, 4vw, 2rem);
+    border-bottom: 1px solid var(--line-quiet);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.74rem;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .brand img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+  }
+
+  .nav {
+    display: flex;
+    gap: 1rem;
+    color: var(--text-dim);
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .section {
+    padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1rem, 4vw, 2rem);
+  }
+
+  .section-inner {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+  }
+
+  .calibration-label {
+    display: block;
+    margin-bottom: 0.7rem;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.67rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .section-title {
+    max-width: 720px;
+    margin: 0;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: clamp(1.7rem, 4.2vw, 3.2rem);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    line-height: 1.08;
+    color: var(--cream-bright);
+  }
+
+  .account-shell .section-title {
+    font-size: clamp(1.65rem, 3.6vw, 2.8rem);
+  }
+
+  .section-note {
+    max-width: 680px;
+    margin: 1rem 0 0;
+    color: var(--text-dim);
+  }
+
+  .hinge {
+    width: min(420px, 80%);
+    height: 1px;
+    margin: 2rem auto;
+    background: linear-gradient(to right, transparent, rgba(154, 106, 31, 0.62), var(--gold), rgba(154, 106, 31, 0.5), transparent);
+    position: relative;
+  }
+
+  .hinge::after {
+    content: "◇";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0 0.5rem;
+    background: var(--green-deep);
+    color: var(--gold);
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.78rem;
+  }
+
+  .account-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(310px, 0.55fr);
+    gap: clamp(1.5rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .intro-list {
+    display: grid;
+    gap: 0.7rem;
+    margin-top: 1.6rem;
+    color: var(--cream);
+  }
+
+  .intro-row {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--line-quiet);
+  }
+
+  .intro-row span:first-child {
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .form-panel {
+    border: 1px solid rgba(216, 154, 58, 0.3);
+    background: rgba(29, 40, 26, 0.9);
+    box-shadow: var(--shadow);
+    padding: clamp(1.1rem, 4vw, 1.6rem);
+    position: relative;
+  }
+
+  .form-panel::before,
+  .form-panel::after {
+    content: "";
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    pointer-events: none;
+  }
+
+  .form-panel::before {
+    top: 0.65rem;
+    left: 0.65rem;
+    border-top: 1px solid var(--gold-dim);
+    border-left: 1px solid var(--gold-dim);
+  }
+
+  .form-panel::after {
+    right: 0.65rem;
+    bottom: 0.65rem;
+    border-right: 1px solid var(--gold-dim);
+    border-bottom: 1px solid var(--gold-dim);
+  }
+
+  .panel-title {
+    margin: 0 0 1rem;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream-bright);
+  }
+
+  label {
+    display: block;
+    margin: 0.85rem 0 0.35rem;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    border: 1px solid rgba(216, 154, 58, 0.28);
+    border-radius: 0;
+    background: rgba(20, 28, 18, 0.82);
+    color: var(--cream);
+    padding: 0.74rem 0.8rem;
+    font: inherit;
+  }
+
+  textarea { min-height: 92px; resize: vertical; }
+
+  .button-row {
+    display: flex;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    margin-top: 1.1rem;
+  }
+
+  .button {
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .button.primary {
+    background: var(--gold);
+    color: #11170f;
+  }
+
+  .event-hero {
+    min-height: min(760px, 95vh);
+    display: grid;
+    align-items: end;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(1rem, 4vw, 2rem);
+    isolation: isolate;
+  }
+
+  .event-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(10, 14, 9, 0.06), rgba(10, 14, 9, 0.72) 72%, var(--green-deep)),
+      linear-gradient(90deg, rgba(10, 14, 9, 0.82), rgba(10, 14, 9, 0.18) 58%, rgba(10, 14, 9, 0.62)),
+      url("../events/rsvp-template/soiree-gervex.jpg") center 58% / cover;
+    z-index: -1;
+  }
+
+  .event-grid {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(310px, 390px);
+    gap: clamp(1.5rem, 5vw, 4rem);
+    align-items: end;
+  }
+
+  .event-title {
+    max-width: 720px;
+    margin: 0;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: clamp(2.1rem, 7vw, 4.7rem);
+    font-weight: 500;
+    letter-spacing: 0.035em;
+    line-height: 1.02;
+    color: var(--cream-bright);
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
+  }
+
+  .title-rule {
+    display: block;
+    width: min(360px, 74%);
+    height: 1px;
+    margin: 0.18em auto 0.16em;
+    background: linear-gradient(to right, transparent, var(--gold), rgba(154, 106, 31, 0.48), transparent);
+  }
+
+  .event-dek {
+    max-width: 620px;
+    margin: 1.2rem 0 0;
+    font-size: clamp(1.08rem, 2.3vw, 1.32rem);
+    color: var(--cream);
+  }
+
+  .metadata {
+    display: grid;
+    gap: 0.15rem;
+    margin-top: 1.5rem;
+    max-width: 620px;
+  }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: 6.7rem 1fr;
+    gap: 1rem;
+    padding: 0.58rem 0;
+    border-top: 1px solid rgba(216, 154, 58, 0.28);
+  }
+
+  .meta-row b {
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .rsvp-panel {
+    border: 1px solid rgba(216, 154, 58, 0.36);
+    background: rgba(20, 28, 18, 0.86);
+    box-shadow: var(--shadow);
+    padding: 1.3rem;
+  }
+
+  .rsvp-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.9rem;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .rsvp-status::before {
+    content: "◇";
+    font-size: 0.65rem;
+  }
+
+  .choice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.55rem;
+  }
+
+  .choice {
+    min-height: 44px;
+    border: 1px solid rgba(216, 154, 58, 0.34);
+    color: var(--cream);
+    background: rgba(38, 52, 34, 0.86);
+    font: inherit;
+  }
+
+  .choice:first-child {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .event-follow {
+    padding: clamp(2.5rem, 7vw, 5rem) clamp(1rem, 4vw, 2rem);
+  }
+
+  .program {
+    width: min(900px, 100%);
+    margin: 0 auto;
+  }
+
+  .program-row {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-top: 1px solid var(--line-quiet);
+  }
+
+  .program-time {
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .admin-section {
+    background: #f6f2e8;
+    color: #20231c;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .admin-shell {
+    width: min(1180px, 100%);
+    margin: 0 auto;
+  }
+
+  .admin-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ddd3bf;
+  }
+
+  .admin-title {
+    margin: 0;
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    line-height: 1.15;
+    color: #192018;
+  }
+
+  .admin-sub {
+    margin: 0.35rem 0 0;
+    color: #6c665b;
+    font-size: 0.92rem;
+  }
+
+  .admin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .admin-button {
+    border: 1px solid #bbb09c;
+    background: white;
+    color: #252820;
+    border-radius: 6px;
+    padding: 0.62rem 0.82rem;
+    font: 600 0.88rem/1 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .admin-button.primary {
+    border-color: #2d3a26;
+    background: #2d3a26;
+    color: #fff8e8;
+  }
+
+  .filters {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(3, minmax(120px, 0.7fr));
+    gap: 0.6rem;
+    margin: 1rem 0;
+  }
+
+  .filters input,
+  .filters select {
+    border: 1px solid #d8cfbc;
+    border-radius: 6px;
+    background: white;
+    color: #20231c;
+    min-height: 42px;
+    padding: 0.6rem 0.75rem;
+    font: inherit;
+  }
+
+  .people-list {
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .person-row {
+    display: grid;
+    grid-template-columns: minmax(180px, 1.1fr) 0.7fr 0.9fr 1fr auto;
+    gap: 0.8rem;
+    align-items: center;
+    border: 1px solid #dfd5c3;
+    border-radius: 8px;
+    background: white;
+    padding: 0.75rem 0.85rem;
+    font-size: 0.93rem;
+  }
+
+  .person-main strong {
+    display: block;
+    color: #161b14;
+  }
+
+  .muted {
+    color: #726b60;
+    font-size: 0.86rem;
+  }
+
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #d5c9b4;
+    border-radius: 999px;
+    padding: 0.18rem 0.45rem;
+    color: #4d5845;
+    background: #faf7ef;
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 760px) {
+    html { font-size: 17px; }
+
+    .nav { display: none; }
+
+    .section { padding: 2.4rem 1rem; }
+
+    .account-shell,
+    .event-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .intro-row,
+    .meta-row,
+    .program-row {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .event-hero {
+      min-height: auto;
+      padding: 5rem 1rem 1.2rem;
+    }
+
+    .rsvp-panel {
+      margin-top: 1.25rem;
+    }
+
+    .choice-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .filters {
+      grid-template-columns: 1fr;
+    }
+
+    .admin-head {
+      align-items: start;
+      flex-direction: column;
+    }
+
+    .person-row {
+      grid-template-columns: 1fr;
+      gap: 0.35rem;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="topbar">
+    <div class="brand">
+      <img src="../logo.png" alt="">
+      <span>Avalon Institute</span>
+    </div>
+    <nav class="nav" aria-label="Calibration sections">
+      <span>Account</span>
+      <span>Event</span>
+      <span>CRM</span>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section" aria-labelledby="account-title">
+      <div class="section-inner account-shell">
+        <div>
+          <span class="calibration-label">Account surface</span>
+          <h1 id="account-title" class="section-title">Create your Avalon account</h1>
+          <p class="section-note">A quiet account screen: one institutional mark, one structural hinge, and clear form hierarchy. The ornament is allowed to hold the form; it should not compete with the work.</p>
+          <div class="hinge" aria-hidden="true"></div>
+          <div class="intro-list">
+            <div class="intro-row">
+              <span>Events</span>
+              <span>See invitations and gatherings matched to your location, interests, and role.</span>
+            </div>
+            <div class="intro-row">
+              <span>Updates</span>
+              <span>Choose what Avalon sends, which topics matter, and which channels are welcome.</span>
+            </div>
+            <div class="intro-row">
+              <span>Profile</span>
+              <span>Keep a simple community profile and control what appears in the directory.</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="form-panel">
+          <h2 class="panel-title">Start here</h2>
+          <label for="name">Name</label>
+          <input id="name" value="Jonathan Wallis">
+          <label for="email">Email</label>
+          <input id="email" value="jonathan@example.com">
+          <label for="city">Primary city or metro</label>
+          <select id="city">
+            <option>Bay Area</option>
+            <option>NYC</option>
+            <option>Boston/Cambridge</option>
+            <option>London</option>
+          </select>
+          <label for="note">A note for Avalon</label>
+          <textarea id="note">Interested in salons, writing, and helping host smaller gatherings.</textarea>
+          <div class="button-row">
+            <button type="button" class="button primary">Create account</button>
+            <button type="button" class="button">Sign in</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="event-hero" aria-labelledby="event-title">
+      <div class="event-grid">
+        <div>
+          <span class="calibration-label">Event surface</span>
+          <h2 id="event-title" class="event-title">
+            Summer
+            <span class="title-rule" aria-hidden="true"></span>
+            Soiree
+          </h2>
+          <p class="event-dek">An image-led invitation where type, metadata rails, and a few small marks guide the eye from occasion to RSVP.</p>
+          <div class="metadata">
+            <div class="meta-row"><b>Date</b><span>Saturday, August 16</span></div>
+            <div class="meta-row"><b>Time</b><span>7:30 PM</span></div>
+            <div class="meta-row"><b>Place</b><span>Avalon House, address visible after RSVP</span></div>
+            <div class="meta-row"><b>Cost</b><span>Free; suggested donation $20</span></div>
+          </div>
+        </div>
+
+        <aside class="rsvp-panel" aria-label="RSVP">
+          <span class="rsvp-status">Invitation open</span>
+          <h3 class="panel-title">RSVP</h3>
+          <p class="section-note" style="margin-top:0">Choose a response. SMS reminders stay off unless you opt in.</p>
+          <div class="choice-grid">
+            <button class="choice" type="button">Going</button>
+            <button class="choice" type="button">Maybe</button>
+            <button class="choice" type="button">Decline</button>
+          </div>
+          <label for="reminder">Reminder channel</label>
+          <select id="reminder">
+            <option>Email only</option>
+            <option>Email and SMS</option>
+            <option>No reminders</option>
+          </select>
+          <div class="button-row">
+            <button type="button" class="button primary">Save RSVP</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="event-follow" aria-labelledby="program-title">
+      <div class="program">
+        <span class="calibration-label">Event followup content</span>
+        <h2 id="program-title" class="section-title">The evening</h2>
+        <p class="section-note">The hinge here is structural: a transition from invitation to schedule. This is about direction, not decoration.</p>
+        <div class="hinge" aria-hidden="true"></div>
+        <div class="program-row">
+          <span class="program-time">7:30</span>
+          <span>Arrival, drinks, and introductions.</span>
+        </div>
+        <div class="program-row">
+          <span class="program-time">8:15</span>
+          <span>Short remarks on the next season of Avalon events.</span>
+        </div>
+        <div class="program-row">
+          <span class="program-time">9:00</span>
+          <span>Open salon and garden conversation.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section admin-section" aria-labelledby="admin-title">
+      <div class="admin-shell">
+        <div class="admin-head">
+          <div>
+            <h2 id="admin-title" class="admin-title">People</h2>
+            <p class="admin-sub">No ornament test: this surface should be fast, dense, and boring in the right way.</p>
+          </div>
+          <div class="admin-actions">
+            <button class="admin-button">Export</button>
+            <button class="admin-button primary">New segment</button>
+          </div>
+        </div>
+
+        <div class="filters" aria-label="People filters">
+          <input value="Search people">
+          <select><option>All roles</option></select>
+          <select><option>Bay Area</option></select>
+          <select><option>Needs review</option></select>
+        </div>
+
+        <div class="people-list">
+          <div class="person-row">
+            <div class="person-main"><strong>Ari K.</strong><span class="muted">ari@example.com</span></div>
+            <span>Community</span>
+            <span>Bay Area</span>
+            <span><span class="tag-pill">salons</span> <span class="tag-pill">writing</span></span>
+            <span class="muted">POC: Maya</span>
+          </div>
+          <div class="person-row">
+            <div class="person-main"><strong>Leah M.</strong><span class="muted">leah@example.com</span></div>
+            <span>Acquaintance</span>
+            <span>NYC</span>
+            <span><span class="tag-pill">governance</span> <span class="tag-pill">events</span></span>
+            <span class="muted">Review</span>
+          </div>
+          <div class="person-row">
+            <div class="person-main"><strong>Sam R.</strong><span class="muted">sam@example.com</span></div>
+            <span>Contributor</span>
+            <span>Boston</span>
+            <span><span class="tag-pill">hosting</span> <span class="tag-pill">research</span></span>
+            <span class="muted">POC: Sam</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>
